@@ -29,21 +29,21 @@ from numpy import number
 
 def leastFactorial(n):
 
-    # running factorial value
-    value = 1
+	# running factorial value
+	value = 1
 
-    # factor of current iteration of factorial loop
-    factor = 1
+	# factor of current iteration of factorial loop
+	factor = 1
 
-    # find factorial value until that value is above n
-    while(value < n):
-        # next factorial value
-        value *= factor
-        
-        # increase factor for next factorial value
-        factor += 1
-    
-    return value
+	# find factorial value until that value is above n
+	while(value < n):
+		# next factorial value
+		value *= factor
+		
+		# increase factor for next factorial value
+		factor += 1
+	
+	return value
 
 def testLeastFactorial():
 	print('-' * 20)
@@ -54,7 +54,6 @@ def testLeastFactorial():
 	assert leastFactorial(1) == 1
 	assert leastFactorial(0) == 1
 	assert leastFactorial(3628799) == 3628800
-	# TODO: add your own test cases here
 
 	print('PASSED PROBLEM 1!')
 
@@ -69,25 +68,25 @@ def testLeastFactorial():
 
 def getTotalNumberOfLipsticks(numberOfLipsticks, numberOfLeftoversNeeded):
 
-    #current number of leftover lipstick
-    leftOver = numberOfLipsticks
-    #running sum of lipsticks sold
-    sold = numberOfLipsticks
+	#current number of leftover lipstick
+	leftOver = numberOfLipsticks
+	#running sum of lipsticks sold
+	sold = numberOfLipsticks
 
-    #while there are at least the amount of needed lipstick
-    while(leftOver >= numberOfLeftoversNeeded):
-        temp = leftOver
+	#while there are at least the amount of needed lipstick
+	while(leftOver >= numberOfLeftoversNeeded):
+		temp = leftOver
 
-        # add to sold the number of new lipsticks you can make and sell
-        sold += floor(leftOver / numberOfLeftoversNeeded)
-        
-        # subtract from leftOver, the number of leftOver lipsticks used to make new lipsticks
-        leftOver -= (numberOfLeftoversNeeded * floor(leftOver / numberOfLeftoversNeeded))
+		# add to sold the number of new lipsticks you can make and sell
+		sold += floor(leftOver / numberOfLeftoversNeeded)
+		
+		# subtract from leftOver, the number of leftOver lipsticks used to make new lipsticks
+		leftOver -= (numberOfLeftoversNeeded * floor(leftOver / numberOfLeftoversNeeded))
 
-        # add to leftOver, the number of new lipsticks sold this time
-        leftOver += floor(temp / numberOfLeftoversNeeded)
-    
-    return sold
+		# add to leftOver, the number of new lipsticks sold this time
+		leftOver += floor(temp / numberOfLeftoversNeeded)
+	
+	return sold
 
 def testLipsticks():
 	print('\n'+ '-' * 20)
@@ -98,7 +97,6 @@ def testLipsticks():
 	assert getTotalNumberOfLipsticks(0, 10) == 0
 	assert getTotalNumberOfLipsticks(1, 2) == 1
 	assert getTotalNumberOfLipsticks(20, 40) == 20
-	# TODO: add your own test cases here
 
 	print('PASSED PROBLEM 2!')
 
@@ -119,14 +117,21 @@ def testLipsticks():
 # chair number 3
 
 def getLastStudent(numberOfStudents, treats, startingChair):
-	# TODO: Solve problem 3 here
+
+	# if the number of treats is exactly one more than number of students
 	if(numberOfStudents == treats - 1):
 		return startingChair
+	# if the number of treats is less than number of students
 	if(treats < numberOfStudents):
+		# do numberOfstudents mod treats to find number of chairs after starting chair,
+		# add starting chair after for offset 
 		return (numberOfStudents % treats + startingChair)
 	else:
+		# do all complete rotations of students to get leftover treats
+		# add starting chair for offset
 		return treats % numberOfStudents + startingChair - 1
-def testLastStudent():#2345671 2345671 23456------3123123-------11------212------121
+
+def testLastStudent():
 		print('\n'+ '-' * 20)
 		print('Part 3: Students and Treats')
 		assert getLastStudent(5,2,1) == 2
@@ -136,20 +141,27 @@ def testLastStudent():#2345671 2345671 23456------3123123-------11------212-----
 		assert getLastStudent(1, 2, 1) == 1
 		assert getLastStudent(2, 3, 2) == 2 
 		assert getLastStudent(2, 3, 1) == 1
-		# TODO add your own test cases here
 
 		print('PASSED PROBLEM 3!')
 
 def getPairsOfShoes(listOfShoes):
-	# TODO: Solve problem 4 here
+	# init empty list of every type of shoe and their count
 	counts = {}
+
 	for shoe in listOfShoes:
-		#print(counts[shoe])
+		
+		# if type of shoe already know, add to running sum
 		if shoe in counts:
 			counts[shoe] += 1
+		# else add a new type of show with count of 1
 		else:
 			counts[shoe] = 1
+	
+	# init count of pairs
 	count = 0
+
+	# for each type of show, find the number of pairs you can do
+	# and add to running sum
 	for shoe in counts:
 		count += (counts[shoe] - (counts[shoe] % 2)) / 2
 	return count
@@ -164,7 +176,6 @@ def testPairsOfShoes():
 	assert getPairsOfShoes(["red", "blue", "red", "green", "green", "red"]) == 2
 	assert getPairsOfShoes(["green", "blue", "blue", "blue", "blue", "blue", "green"]) == 3
 	assert getPairsOfShoes(["red","red", "red", "red", "red", "blue", "green", "blue"]) == 3
-	# TODO: Add your own test cases here
 
 	print('PASSED PROBLEM 4!')
 	print('\n\nCongratulations!!')
