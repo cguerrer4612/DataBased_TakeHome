@@ -24,12 +24,21 @@ from numpy import floor
 
 
 def leastFactorial(n):
-    # TODO: Solve problem 1 here
+
+    # running factorial value
     value = 1
+
+    # factor of current iteration of factorial loop
     factor = 1
+
+    # find factorial value until that value is above n
     while(value < n):
+        # next factorial value
         value *= factor
+        
+        # increase factor for next factorial value
         factor += 1
+    
     return value
 
 def testLeastFactorial():
@@ -52,15 +61,25 @@ def testLeastFactorial():
 # assuming that each of your customers return their leftovers
 
 def getTotalNumberOfLipsticks(numberOfLipsticks, numberOfLeftoversNeeded):
-    # TODO: Solve problem 2 here
+
+    #current number of leftover lipstick
     leftOver = numberOfLipsticks
+    #running sum of lipsticks sold
     sold = numberOfLipsticks
+
+    #while there are at least the amount of needed lipstick
     while(leftOver >= numberOfLeftoversNeeded):
         temp = leftOver
+
+        # add to sold the number of new lipsticks you can make and sell
         sold += floor(leftOver / numberOfLeftoversNeeded)
+        
+        # subtract from leftOver, the number of leftOver lipsticks used to make new lipsticks
         leftOver -= (numberOfLeftoversNeeded * floor(leftOver / numberOfLeftoversNeeded))
+
+        # add to leftOver, the number of new lipsticks sold this time
         leftOver += floor(temp / numberOfLeftoversNeeded)
-    print(sold)
+    
     return sold
 
 def testLipsticks():
