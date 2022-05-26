@@ -19,8 +19,12 @@
 # words, find the smallest factorial which is not less than n.
 
 from math import ceil
+from math import floor
+from tkinter.ttk import LabeledScale
+from tracemalloc import start
+from webbrowser import get
 
-from numpy import floor
+from numpy import number
 
 
 def leastFactorial(n):
@@ -42,14 +46,17 @@ def leastFactorial(n):
     return value
 
 def testLeastFactorial():
-    print('-' * 20)
-    print('Part 1: Least Factorial')
+	print('-' * 20)
+	print('Part 1: Least Factorial')
 
-    assert leastFactorial(17) == 24
-    assert leastFactorial(5) == 6
-    # TODO: add your own test cases here
+	assert leastFactorial(17) == 24
+	assert leastFactorial(5) == 6
+	assert leastFactorial(1) == 1
+	assert leastFactorial(0) == 1
+	assert leastFactorial(3628799) == 3628800
+	# TODO: add your own test cases here
 
-    print('PASSED PROBLEM 1!')
+	print('PASSED PROBLEM 1!')
 
 # PROBLEM 2 - Reclying Lipstick
 # You own a lipstick business. When a lipstick container is empty, there is actu-
@@ -83,15 +90,17 @@ def getTotalNumberOfLipsticks(numberOfLipsticks, numberOfLeftoversNeeded):
     return sold
 
 def testLipsticks():
-    print('\n'+ '-' * 20)
-    print('Part 2: Lipsticks')
-    assert getTotalNumberOfLipsticks(5, 2) == 9
-    assert getTotalNumberOfLipsticks(15, 5) == 18
-    assert getTotalNumberOfLipsticks(2, 3) == 2
-    assert getTotalNumberOfLipsticks(0, 10) == 0
-    # TODO: add your own test cases here
+	print('\n'+ '-' * 20)
+	print('Part 2: Lipsticks')
+	assert getTotalNumberOfLipsticks(5, 2) == 9
+	assert getTotalNumberOfLipsticks(15, 5) == 18
+	assert getTotalNumberOfLipsticks(2, 3) == 2
+	assert getTotalNumberOfLipsticks(0, 10) == 0
+	assert getTotalNumberOfLipsticks(1, 2) == 1
+	assert getTotalNumberOfLipsticks(20, 40) == 20
+	# TODO: add your own test cases here
 
-    print('PASSED PROBLEM 2!')
+	print('PASSED PROBLEM 2!')
 
 # PROBLEM 3 - Students and Treats
 # A school teacher wants to hand out treats to his students. The teacher de-
@@ -110,37 +119,55 @@ def testLipsticks():
 # chair number 3
 
 def getLastStudent(numberOfStudents, treats, startingChair):
-    # TODO: Solve problem 3 here
-    return None
+	# TODO: Solve problem 3 here
+	if(numberOfStudents == treats - 1):
+		return startingChair
+	if(treats < numberOfStudents):
+		return (numberOfStudents % treats + startingChair)
+	else:
+		return treats % numberOfStudents + startingChair - 1
+def testLastStudent():#2345671 2345671 23456------3123123-------11------212------121
+		print('\n'+ '-' * 20)
+		print('Part 3: Students and Treats')
+		assert getLastStudent(5,2,1) == 2
+		assert getLastStudent(5,2,2) == 3
+		assert getLastStudent(7,19,2) == 6
+		assert getLastStudent(3,7,3) == 3
+		assert getLastStudent(1, 2, 1) == 1
+		assert getLastStudent(2, 3, 2) == 2 
+		assert getLastStudent(2, 3, 1) == 1
+		# TODO add your own test cases here
 
-def testLastStudent():
-        print('\n'+ '-' * 20)
-        print('Part 3: Students and Treats')
-        assert getLastStudent(5,2,1) == 2
-        assert getLastStudent(5,2,2) == 3
-        assert getLastStudent(7,19,2) == 6
-        assert getLastStudent(3,7,3) == 3
-        # TODO add your own test cases here
-
-        print('PASSED PROBLEM 3!')
+		print('PASSED PROBLEM 3!')
 
 def getPairsOfShoes(listOfShoes):
-    # TODO: Solve problem 4 here
-    return None
+	# TODO: Solve problem 4 here
+	counts = {}
+	for shoe in listOfShoes:
+		#print(counts[shoe])
+		if shoe in counts:
+			counts[shoe] += 1
+		else:
+			counts[shoe] = 1
+	count = 0
+	for shoe in counts:
+		count += (counts[shoe] - (counts[shoe] % 2)) / 2
+	return count
 
 # PROBLEM 4 - Pairs of Shoes
 # Given an array of strings that represent a type of shoe, return how many matching
 # pairs of shoes can be made?
 
 def testPairsOfShoes():
-    print('\n'+ '-' * 20)
-    print('Part 4: Pairs of Shoes')
-    assert getPairsOfShoes(["red", "blue", "red", "green", "green", "red"]) == 2
-    assert getPairsOfShoes(["green", "blue", "blue", "blue", "blue", "blue", "green"]) == 3
-    # TODO: Add your own test cases here
+	print('\n'+ '-' * 20)
+	print('Part 4: Pairs of Shoes')
+	assert getPairsOfShoes(["red", "blue", "red", "green", "green", "red"]) == 2
+	assert getPairsOfShoes(["green", "blue", "blue", "blue", "blue", "blue", "green"]) == 3
+	assert getPairsOfShoes(["red","red", "red", "red", "red", "blue", "green", "blue"]) == 3
+	# TODO: Add your own test cases here
 
-    print('PASSED PROBLEM 4!')
-    print('\n\nCongratulations!!')
+	print('PASSED PROBLEM 4!')
+	print('\n\nCongratulations!!')
 
 # Call test functions
 testLeastFactorial()
